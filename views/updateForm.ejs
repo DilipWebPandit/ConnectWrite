@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Update Article</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+    <div class="container">
+      <h1>Update your Article</h1>
+      <div class="container-fluid mt-3">
+        <form action="/article/update/<%= article._id %>?_method=PUT" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="writeNameInput" name="writerName" />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="titleInput" name="title" />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Upload Image for your article</label>
+            <input type="file" class="form-control" id="titleInput" name="articleImage" />
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" placeholder="Write your Article... " id="articleTextInput"
+              style="height: 300px" name="content"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

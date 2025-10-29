@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Show all Articles</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+
+    <div class="container">
+
+
+
+      <% if (locals.message) { %>
+        <div id="flashMessage" class="alert">
+          <%= message %>
+        </div>
+        <% } %>
+
+          <% if (user) { %>
+            <h1>
+              Your Articles Dashboard, <%= user.name %>
+            </h1>
+            <% } %>
+
+              <div class="container" style="height: 78vh; overflow-y: scroll;">
+                <div class="container-fluid row form-floating">
+                  <% if (articles && articles.length> 0) { %>
+                    <% articles.forEach(article=> { %>
+                      <div class="card m-3" style="width: 18rem; height: 80%; overflow: hidden; margin-bottom: 20px;">
+                        <img src=<%=article.imageUrl %> class="card-img-top mt-2" alt="article image" style="height:
+                        32vh">
+                        <div class="card-body">
+                          <div style="overflow: hidden;">
+                            <h5 class="card-title">Written by:- <%= article.writerName %>
+                            </h5>
+                            <h7 class="card-title">Written by:- <%= article.writerName %>
+                            </h7>
+                          </div>
+                          <h6 class="card-subtitle mb-2 text-muted">
+                            <%= article.title %>
+                          </h6>
+                          <div style="height: 60px; overflow: hidden;">
+                            <p class="card-text mb-0">
+                              <%= article.content %>
+                            </p>
+                          </div>
+                        </div>
+                        <a href="/article/readCard/<%= article._id %>" class="btn btn-primary mb-3">Read
+                          More</a>
+                        <div>
+                          <a href="/article/Update/<%= article._id %>" class="btn btn-primary mb-3">Update</a>
+                          <a href="/article/delete/<%= article._id %>" class="btn btn-primary mb-3">Delete</a>
+                        </div>
+                      </div>
+                      <% }); %>
+                        <% } else { %>
+                          <h2>Sorry! No article is found</h2>
+                          <% } %>
+
+                </div>
+              </div>
+              <a href="/article/upload" class="btn btn-primary position-fixed top-0 end-0 me-4"
+                style="width: 150px; margin-top: 5% !important;">
+                Create Article
+              </a>
+    </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+
+</body>
+
+</html>

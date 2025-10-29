@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Articles</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+
+    <% if (locals.message) { %>
+      <div id="flashMessage" class="alert">
+        <%= message %>
+      </div>
+      <% } %>
+
+        <div class="container my-2">
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="mb-3">All Articles</h1>
+
+              <% if (articles && articles.length> 0) { %>
+                <div class="row" style="height: 79vh; overflow-y: scroll;">
+                  <% articles.forEach(article=> { %>
+                    <div class="card mx-3" style="width: 20rem; height: 80%;margin-bottom: 20px; overflow: hidden;">
+                      <div>
+                        <img src=<%=article.imageUrl %> class="card-img-top mt-2" alt="article image" style="height:
+                        32vh">
+                        <h7 class="card-title"><span style="font-weight: bold;">Date:-</span>
+                          <%= new Date(article.created_at).toLocaleDateString("en-GB") %>
+                        </h7>
+                      </div>
+                      <div class="card-body pt-1 px-0">
+                        <div class=" d-flex justify-content-between align-items-center">
+                          <h6 class="card-title">
+                            <span>Written by:-</span>
+                            <span style="font-weight: 700;">
+                              <%= article.writerName %>
+                            </span>
+                          </h6>
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                          <span>Title:-</span>
+                          <span style=" font-weight: 700;">
+                            <%= article.title %>
+                          </span>
+                        </h6>
+                        <div style="height: 50px; overflow: hidden;">
+                          <p class="card-text mb-0">
+                            <%= article.content %>
+                          </p>
+                        </div>
+                      </div>
+                      <a href="/article/readCard/<%= article._id %>" class="btn btn-primary mb-3">Read More</a>
+                    </div>
+                    <% }); %>
+                </div>
+                <% } else { %>
+                  <h2>Sorry! No article is found</h2>
+                  <% } %>
+
+                    <a href="/article/upload" class="btn btn-primary position-fixed top-0 end-0 me-4"
+                      style="width: 150px; margin-top: 5% !important;">
+                      Create Article
+                    </a>
+            </div>
+          </div>
+        </div>
+
+        <%- include('./partials/scripts') %>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>OTP Verification</title>
+    <style>
+      .otp-box {
+        height: 90vh;
+      }
+
+      .otp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .otp input {
+        width: 13%;
+        height: 13vh;
+        border-radius: 15px;
+        margin: 5px;
+        font-size: 60px;
+        text-align: center;
+      }
+
+      button {
+        margin-top: 50px;
+      }
+    </style>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+    <% if (locals.message) { %>
+      <div id="flashMessage" class="alert">
+        <%= message %>
+      </div>
+      <% } %>
+
+        <div class="container text-center">
+          <h1>Please Enter your OTP</h1>
+          <div class="container-fluid mt-3 row form-floating otp-box">
+            <form action="/verifyOtp" method="post" id="otpForm">
+              <div class="otp">
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+                <input type="text" maxlength="1" class="otp-input" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+
+        <script>
+          const inputs = document.querySelectorAll(".otp-input");
+          const form = document.getElementById("otpForm");
+
+          inputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+              if (e.target.value && index < inputs.length - 1) {
+                inputs[index + 1].focus();
+              }
+            });
+
+            input.addEventListener("keydown", (e) => {
+              if (e.key === "Backspace" && !e.target.value && index > 0) {
+                inputs[index - 1].focus();
+              }
+            });
+          });
+
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            let otp = "";
+            inputs.forEach(input => otp += input.value);
+
+            // Append hidden input with combined OTP
+            const hidden = document.createElement("input");
+            hidden.type = "hidden";
+            hidden.name = "otp";
+            hidden.value = otp;
+            form.appendChild(hidden);
+
+            form.submit();
+          });
+        </script>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>

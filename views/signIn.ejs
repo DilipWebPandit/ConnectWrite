@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Sign In</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+
+    <div class="container">
+      <% if (locals.message) { %>
+        <div id="flashMessage" class="alert">
+          <%= message %>
+        </div>
+        <% } %>
+
+
+          <form method="post" action="/signIn">
+
+            <div class="mb-3">
+              <label for="inputEmail" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="inputPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

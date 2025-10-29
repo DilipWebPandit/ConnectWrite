@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <title>Read Card</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+    <!-- if condition -->
+
+
+    <div class="container">
+      <div class="container-fluid mt-3 row form-floating">
+        <% articles.forEach(article=> { %>
+          <div class="card m-3">
+            <img src="<%= article.imageUrl %>" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= article.writerName %>
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                <%= article.title %>
+              </h6>
+              <p class="card-text">
+                <%= article.content %>
+              </p>
+            </div>
+            <!-- <a href="#" class="btn btn-primary mb-3">Read More</a> -->
+          </div>
+          <% }); %>
+
+      </div>
+    </div>
+
+    </div>
+
+    <%- include('./partials/scripts') %>
+
+</body>
+
+</html>
