@@ -7,7 +7,7 @@ const connectDB = async (req, res) => {
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000,
     });
-    console.log(`✅ MongoDB connected: ${conn.connection.host}`);
+    console.log(`✅ MongoDB connected`);
 
     mongoose.connection.on("error", (err) => {
       console.log("Database connection error", err);
